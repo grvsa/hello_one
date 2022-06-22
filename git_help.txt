@@ -76,3 +76,145 @@ git status
 #файлы в репозитории могут быть остлеживаемые и неотслеживаемые
 #git status будет показывать все - но git commit будут только остлеживаемые
 #добавление в отслеживаемые через git add видимо
+
+#сокращенный вывод статуса
+git status -s
+
+c:\dj>git status -s
+ M git_help.txt #модифицированый отслеживаемый файл
+ M help.txt     #модифицированый отслеживаемый файл
+?? readme.txt   #неотслеживаемый не добавлен через git add
+
+c:\dj>git status -s
+ M git_help.txt
+ M help.txt
+ D help2.txt    #удаленный отслеживаемый файл
+?? readme.txt
+
+
+#просмотр изменений в измененных файлах ВЫХОД ЧЕРЕЗ "q" когда <END>
+git diff
+
+-----------------------------------------------------------------------------
+c:\dj>git diff
+diff --git a/git_help.txt b/git_help.txt
+index f022603..7b610b4 100644
+--- a/git_help.txt
++++ b/git_help.txt
+@@ -76,3 +76,21 @@ git status
+ #файлы в репозитории могут быть остлеживаемые и неотслеживаемые
+ #git status будет показывать все - но git commit будут только остлеживаемые
+ #добавление в отслеживаемые через git add видимо
++
++#сокращенный вывод статуса
++git status -s
++
++c:\dj>git status -s
++ M git_help.txt #модифицированый отслеживаемый файл
++ M help.txt     #модифицированый отслеживаемый файл
++?? readme.txt   #неотслеживаемый не добавлен через git add
++
++c:\dj>git status -s
++ M git_help.txt
++ M help.txt
++ D help2.txt    #удаленный отслеживаемый файл
++?? readme.txt
++
++
++#просмотр изменений в измененных файлах
++git diff
+diff --git a/help.txt b/help.txt
+index f328f0c..c28628e 100644
+--- a/help.txt
++++ b/help.txt
+@@ -1,3 +1,5 @@
+ change some information
+
+ add more info - commit 2
++
++New line for traced files
+diff --git a/help2.txt b/help2.txt
+deleted file mode 100644
+index 4e0cee8..0000000
+--- a/help2.txt
++++ /dev/null
+@@ -1 +0,0 @@
+-sdsdhkljlwj
+(END)
++ M help.txt     #модифицированый отслеживаемый файл
++?? readme.txt   #неотслеживаемый не добавлен через git add
++
++c:\dj>git status -s
++ M git_help.txt
++ M help.txt
++ D help2.txt    #удаленный отслеживаемый файл
++?? readme.txt
++
++
++#просмотр изменений в измененных файлах
++git diff
+diff --git a/help.txt b/help.txt
+index f328f0c..c28628e 100644
+--- a/help.txt
++++ b/help.txt
+@@ -1,3 +1,5 @@
+ change some information
+
+ add more info - commit 2
++
++New line for traced files
+diff --git a/help2.txt b/help2.txt
+deleted file mode 100644
+index 4e0cee8..0000000
+--- a/help2.txt
++++ /dev/null
+@@ -1 +0,0 @@
+-sdsdhkljlwj
+
+c:\dj>
+-----------------------------------------------------------------------------
+
+#git diff показывает изменения которые еще не попали в индекс ! через git add
+#тобишь если их добавить в индекс но не делать коммит - git diff ничего не покажет
+#в этом случае можно посмотреть индекс кэша
+
+git diff --cached
+
+
+#git diff показывает добавленые строки с '+' а убраные строки с '-'
+----------------------------------------------------------------------------
+diff --git a/help.txt b/help.txt
+index c28628e..da3af33 100644
+--- a/help.txt
++++ b/help.txt
+@@ -1,5 +1,4 @@
+ change some information
+
+-add more info - commit 2                                             #удалены
+
+ New line for traced files
+
+c:\dj>git diff
+diff --git a/git_help.txt b/git_help.txt
+index 039c6e7..72f6088 100644
+--- a/git_help.txt
++++ b/git_help.txt
+@@ -179,3 +179,6 @@ c:\dj>
+ #в этом случае можно посмотреть индекс кэша
+
+ git diff --cached
++                                                                     #добавлены
++                                                                     #добавлены
++#git diff показывает добавленые строки с '+' а убраные строки с '-'  #добавлены
+diff --git a/help.txt b/help.txt
+index c28628e..da3af33 100644
+--- a/help.txt
++++ b/help.txt
+@@ -1,5 +1,4 @@
+ change some information
+
+-add more info - commit 2
+
+ New line for traced files
+
+ ----------------------------------------------------------------------------
