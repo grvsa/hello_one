@@ -222,3 +222,12 @@ index c28628e..da3af33 100644
 #git commit -am "Comment" - позволяет добавлять сразу в индекс и в коммит
 
 git commit -am "7th"
+
+#откат изменений на непроиндексированых файлах - походу оба работают
+git checkout -- file.name
+git restore file.name
+
+#откат изменений в файлах уже внесенных в индекс на коммит git add file.name
+
+git reset HEAD help.txt
+git restore --staged help.txt
