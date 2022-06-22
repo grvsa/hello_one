@@ -1,0 +1,43 @@
+python manage.py runserver - Запускаем сервак http://127.0.0.1:8000/
+django-admin startproject fp - Создаем ПРОЕКТ !!!
+activate - запускаем виртуалку
+
+python -m venv project - Создаем виртуалку project
+
+python manage.py startapp first_app - Создаем приложение Django внутри проекта
+приложений много проект один
+
+------------------------------------------------------------------------------
+Первое приложение коннектим к проекту
+
+#fa - views.py
+
+from django.http import HttpResponse
+
+# Create your views here.
+
+def index(request):
+    return HttpResponse('Hello World')
+
+#fp - urls.py
+
+from fa import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('index/', views.index, name = 'index'),
+]
+
+#fp - settings.py
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'fa',
+]
+
+------------------------------------------------------------------------------
