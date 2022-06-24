@@ -349,3 +349,53 @@ git branch -m newbranch to_delete
 git branch -D to_delete
 
 git log --pretty=format:"%h - %d %s %cd" --graph
+
+
+#слияние веток - необходимо находиться в той ветке в которую будут вливать
+#побочную ветку
+
+git merge test
+git log --pretty=format:"%h - %d %s %cd" --graph
+
+------------------------------------------------------------------------
+c:\dj>git merge test
+Merge made by the 'ort' strategy.
+ branch.txt   |  0
+ git_help.txt | 22 ++++++++++++++++++++++
+ 2 files changed, 22 insertions(+)
+ create mode 100644 branch.txt
+
+c:\dj>git log --pretty=format:"%h -%d %s %cd" --graph
+*   6c486d2 - (HEAD -> master) Merge branch 'test' Fri Jun 24 10:23:40 2022 +0300
+|\
+| * 3b53ae4 - (test) br2 Fri Jun 24 10:19:50 2022 +0300
+| * 9bb6c8b - branch.txt Fri Jun 24 09:46:52 2022 +0300
+* | e34c849 - new file master.txt Fri Jun 24 10:22:53 2022 +0300
+|/
+* d9112db - Shome issue happend Wed Jun 22 16:41:15 2022 +0300
+* 3849263 - Last commit for Today 6 lessons Yahoo ! Wed Jun 22 16:40:25 2022 +0300
+* eeff8d2 - Delete from Index to remove modification Wed Jun 22 15:35:51 2022 +0300
+* f1b9de7 - 7th commit Wed Jun 22 15:19:34 2022 +0300
+* 70957e0 - OK ! 6th Wed Jun 22 15:12:48 2022 +0300
+* e1ddde7 - Update git_help.txt Wed Jun 22 14:41:15 2022 +0300
+* ea0021c - Commit 4th Wed Jun 22 14:28:19 2022 +0300
+* 4493030 - Final commit 3rd Wed Jun 22 14:15:38 2022 +0300
+* f6cd415 - Эназер коммит ! смена редактора получилась !!! Wed Jun 22 13:59:29 2022 +0300
+* 5e2aeca - Comment Wed Jun 22 13:53:53 2022 +0300
+* 5392065 - Первый коммит Wed Jun 22 13:50:16 2022 +0300
+-------------------------------------------------------------------------
+
+#алиасы - создание сокращенной команды которая будет запускать более длинную
+#сама команда в двойных кавычках содержимое если включает кавычки то одинарные
+#можно прописать вручную !! в файле HOME$/.gitconfig (ex c:\Users\Pavlikov\.gitconfig)
+
+git config --global alias.gitlog "log --pretty=format:'%C(yellow)%h%Creset - %C(green)%d%Creset %s %C(bold blue)(%cn) %C(green)%cd%Creset' --graph --date=format:'%d.%m.%Y %H:%M'"
+
+.gitconfig ------------------------------------------------------------------------------
+#проще писать вручную сразу в конфиг - нет гемороя с кавычками - кавычки экранируются: \"
+[alias]
+	last = log -1 HEAD
+	gg = log --pretty=format:\"%C(yellow)%h%Creset - %C(green)%d%Creset %s %C(bold blue)(%cn) %C(green)%cd%Creset\" --graph --date=format:\"%d.%m.%Y %H:%M\"
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+-----------------------------------------------------------------------------------------
+#разрешение конфликтов
