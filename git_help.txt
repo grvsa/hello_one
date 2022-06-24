@@ -345,3 +345,7 @@ git checkout newbranch
 git branch -m newbranch to_delete
 
 #удаление ветки параметр -D
+
+git branch -D to_delete
+
+git log --pretty=format:"%h - %d %s %cd" --graph
