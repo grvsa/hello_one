@@ -399,3 +399,11 @@ git config --global alias.gitlog "log --pretty=format:'%C(yellow)%h%Creset - %C(
 	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
 -----------------------------------------------------------------------------------------
 #разрешение конфликтов
+#когда сливаются 2 конфликтных файла в текущей ветке создается файл содержащий внесенные
+#все внесенные изменения - корректируется вручную - потом добавить в индекс и коммит
+
+git checkout master
+git merge test
+#исправляем hello.php
+git add .
+git commit -m "Conflict solved"
