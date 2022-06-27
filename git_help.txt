@@ -407,3 +407,74 @@ git merge test
 #исправляем hello.php
 git add .
 git commit -m "Conflict solved"
+
+
+#удаленный репозиторий !
+1. регистрируемся ни github
+2. в editprofile жмем + (право верх) выбираем settings
+3. выбираем SSH ...
+4. для винды через ssh-keygen генерим ключ (название не меняем тогда
+он сохранится в $HOME\.ssh\id_rsa и id_rsa.pub) кодовое слово тож не надо
+5. из id_rsa.pub - копируем весь текст и во вкладке github ssh - вставляем его
+6. создаем репозиторий с доступным именем
+7. в след окне про доступ к репозиторию нажимаем на SSH и получаем
+консольные команды для загрузки по ssh:
+git remote add origin git@github.com:grvsa/hello_one.git
+
+тут origin это название ветки мастер я так понял - можно сменить на github к примеру
+git remote add github git@github.com:grvsa/hello_one.git
+
+после этого можем запулить весь репозиторий (ветка master соответственно)
+
+git push github master
+
+если хотим склонировать репозиторий то
+
+git clone git@github.com:grvsa/hello_one.git
+
+если по ошибке создали не тот origin то може удалить
+git remote remove origin
+проверка доступных
+git remote -v
+origin  https://github.com/grvsa/hello.git (fetch)
+origin  https://github.com/grvsa/hello.git (push)
+
+git remote
+github
+origin
+
+эмулируем командную разработку
+
+есть текущий dj
+склонируем в другую папку c:\
+git clone git@github.com:grvsa/hello_one.git
+там создаем index.php
+git add .
+git commit -m "Commit"
+git push github master
+
+переходим в dj
+
+создаем phpinfo.php
+git add .
+git commit -m "Commit"
+git push origin master
+
+c:\dj>git push origin master
+Enter passphrase for key '/c/Users/pavlikov/.ssh/id_rsa':
+To github.com:grvsa/hello_one.git
+ ! [rejected]        master -> master (fetch first)
+error: failed to push some refs to 'github.com:grvsa/hello_one.git'
+hint: Updates were rejected because the remote contains work that you do
+hint: not have locally. This is usually caused by another repository pushing
+hint: to the same ref. You may want to first integrate the remote changes
+hint: (e.g., 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.
+
+тк репозитории теперь не совпадают
+
+поэтому делаем pull
+git pull origin master
+
+теперь index.php есть и в dj поэтому снова делаем push
+git push origin master
