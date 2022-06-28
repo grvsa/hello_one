@@ -634,3 +634,161 @@ git stash drop - удалить все сохранения
 #это не получиться сделать так как в основной ветке нет коммита
 #мы можем засунуть все текущие изменения в stash и откатить ветку до стабильного состояния
 #после этого заниматься чем угодно во второй ветке.
+
+
+#Урок 10 версионирование ! и тэги
+#версии программы обычно состоят из 3х цифр 1.4.0
+1: мажорная версия - сильно переписывается код
+4: минорная версия - небольшие изменения
+0: патч версия - закрываются критические ошибки
+
+#история проекта состоит из цепочки коммитов с хэш кодами
+#поиск по ним затруднителен - поэтому каждому состоянию может быть
+#присвоен тэг для быстрого поиска.
+
+git tag v1.3.0
+
+#тэг можно снабдить комментарием
+
+git tag -a v1.4.0 -m "Новый тэг"
+
+#список тэгов
+$ git tag
+v1.3.0
+v1.4.0
+
+#можно отфильтровать тэги по шаблону * - любое количество символов
+
+git tag -l v1.4*
+
+#удаление тегов
+git tag -d v1.4.0
+
+$ git gg
+* 084e708 -  (HEAD -> master, tag: v1.4.0, tag: v1.3.0) com (GRVSA Alex) 28.06.2022 15:43
+* be327ad -  Text (GRVSA Alex) 28.06.2022 15:35
+* 40d05bb -  upd (GRVSA Alex) 28.06.2022 14:49
+* cb7f217 -  Help2 (GRVSA Alex) 28.06.2022 14:43
+* 7814b4e -  help (GRVSA Alex) 28.06.2022 14:30
+* f324afd -  (origin/to_delete, origin/master, to_delete) Commit fromhome ! (grvsa) 27.06.2022 19:27
+* 66f69d8 -  finish for today 27.06.2022 (GRVSA Alex) 27.06.2022 16:47
+*   a1ee0f9 -  Merge branch 'master' of github.com:grvsa/hello_one (GRVSA Alex) 27.06.2022 16:42
+|\
+| * ec6f17b -  текст урока 8 (GRVSA Alex) 27.06.2022 16:40
+| *   172719d -  Merge branch 'master' of github.com:grvsa/hello_one (GRVSA Alex) 27.06.2022 16:17
+| |\
+| * | af439d4 -  phpinfo from DJ project ! not HELLO_ONE (GRVSA Alex) 27.06.2022 16:16
+* | | 998e32a -  apdeqt repositoriya test.php iz hello_one (GRVSA Alex) 27.06.2022 16:42
+| |/
+|/|
+* | 0efb6cb -  Index.php add to hello_one rep - NOT DJ (GRVSA Alex) 27.06.2022 16:13
+|/
+* a57613d -  (github/master) Last commit for 24.06.2022 lession git7 (GRVSA Alex) 24.06.2022 16:38
+*   2d541b9 -  Conflict solved (GRVSA Alex) 24.06.2022 16:35
+|\
+| * 20e74c6 -  (test) Test branch hello.php (GRVSA Alex) 24.06.2022 16:32
+* | 0e4185c -  Hello PHP (GRVSA Alex) 24.06.2022 16:30
+* | 6c486d2 -  Merge branch 'test' (GRVSA Alex) 24.06.2022 10:23
+|\|
+| * 3b53ae4 -  br2 (GRVSA Alex) 24.06.2022 10:19
+| * 9bb6c8b -  branch.txt (GRVSA Alex) 24.06.2022 09:46
+* | e34c849 -  new file master.txt (GRVSA Alex) 24.06.2022 10:22
+|/
+* d9112db -  Shome issue happend (GRVSA Alex) 22.06.2022 16:41
+* 3849263 -  Last commit for Today 6 lessons Yahoo ! (GRVSA Alex) 22.06.2022 16:40
+* eeff8d2 -  Delete from Index to remove modification (GRVSA Alex) 22.06.2022 15:35
+* f1b9de7 -  7th commit (GRVSA Alex) 22.06.2022 15:19
+* 70957e0 -  OK ! 6th (GRVSA Alex) 22.06.2022 15:12
+* e1ddde7 -  Update git_help.txt (GRVSA Alex) 22.06.2022 14:41
+* ea0021c -  Commit 4th (GRVSA Alex) 22.06.2022 14:28
+* 4493030 -  Final commit 3rd (GRVSA Alex) 22.06.2022 14:15
+* f6cd415 -  Эназер коммит ! смена редактора получилась !!! (GRVSA Alex) 22.06.2022 13:59
+* 5e2aeca -  Comment (GRVSA Alex) 22.06.2022 13:53
+* 5392065 -  Первый коммит (GRVSA Alex) 22.06.2022 13:50
+
+
+#на один коммит можно навесить сколько угодно тэгов
+
+$ git show
+commit 084e7080b64be679a2eb84e087dd727d57fd1517 (HEAD -> master, tag: v1.4.0, tag: v1.3.0)
+Author: GRVSA Alex <grvsa1980@gmail.com>
+Date:   Tue Jun 28 15:43:24 2022 +0300
+
+    com
+
+diff --git a/git_help.txt b/git_help.txt
+index 25780f6..13391ea 100644
+--- a/git_help.txt
++++ b/git_help.txt
+@@ -620,5 +620,17 @@ git add .
+
+ #но вместо коммита мы делаем
+ git stash
++git stash list
++
++git stash apply - вернуть изменения
++git stash apply stash@{1} - вернуть определенное изменение
++git stash drop - удалить все сохранения
+
+ #при этом откатываемся на старое стабильное состояние НО ! новые изменения не потеряны
++
++#суть вот в чем.
++#мы работали с одной веткой .. вносили в неё изменения - но они не рабочие к примеру
++#теперь нам надо переключиться в другую ветку и возможно слить их
++#это не получиться сделать так как в основной ветке нет коммита
++#мы можем засунуть все текущие изменения в stash и откатить ветку до стабильного состояния
++#после этого заниматься чем угодно во второй ветке.
+
+pavlikov@DA-PC-N2 MINGW64 /c/dj (master)
+$
+
+#git самостоятельно предоставляет несколько дополнительных тэгов HEAD к примеру
+# он указывает на последний коммит
+
+$ git show HEAD
+commit 084e7080b64be679a2eb84e087dd727d57fd1517 (HEAD -> master, tag: v1.4.0, tag: v1.3.0)
+Author: GRVSA Alex <grvsa1980@gmail.com>
+Date:   Tue Jun 28 15:43:24 2022 +0300
+
+    com
+
+diff --git a/git_help.txt b/git_help.txt
+index 25780f6..13391ea 100644
+--- a/git_help.txt
++++ b/git_help.txt
+@@ -620,5 +620,17 @@ git add .
+
+ #но вместо коммита мы делаем
+ git stash
++git stash list
++
++git stash apply - вернуть изменения
++git stash apply stash@{1} - вернуть определенное изменение
++git stash drop - удалить все сохранения
+
+ #при этом откатываемся на старое стабильное состояние НО ! новые изменения не потеряны
++
++#суть вот в чем.
++#мы работали с одной веткой .. вносили в неё изменения - но они не рабочие к примеру
++#теперь нам надо переключиться в другую ветку и возможно слить их
++#это не получиться сделать так как в основной ветке нет коммита
++#мы можем засунуть все текущие изменения в stash и откатить ветку до стабильного состояния
++#после этого заниматься чем угодно во второй ветке.
+
+pavlikov@DA-PC-N2 MINGW64 /c/dj (master)
+$
+
+#тэг по умолчанию устанавливается на текущий коммит но можно установить и на любой
+#для этого указывают хэш коммита в конце
+
+git tag -a v1.2.0 -m "Old version" 66f69d8
+
+$ git gg
+* 084e708 -  (HEAD -> master, tag: v1.4.0, tag: v1.3.0) com (GRVSA Alex) 28.06.2022 15:43
+* be327ad -  Text (GRVSA Alex) 28.06.2022 15:35
+* 40d05bb -  upd (GRVSA Alex) 28.06.2022 14:49
+* cb7f217 -  Help2 (GRVSA Alex) 28.06.2022 14:43
+* 7814b4e -  help (GRVSA Alex) 28.06.2022 14:30
+* f324afd -  (origin/to_delete, origin/master, to_delete) Commit fromhome ! (grvsa) 27.06.2022 19:27
+* 66f69d8 -  (tag: v1.2.0) finish for today 27.06.2022 (GRVSA Alex) 27.06.2022 16:47
+*   a1ee0f9 -  Merge branch 'master' of github.com:grvsa/hello_one (GRVSA Alex) 27.06.2022 16:42
