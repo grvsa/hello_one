@@ -554,4 +554,34 @@ git branch
 * master
   test
 
-  
+  git branch -r
+
+github/master
+origin/fix_error
+origin/master
+origin/to_delete
+
+#короче - обычные команды не затрагивают удаленный репозиторий.
+#что бы управлять ветками в удаленном репозитории используются другие команды
+#Удаление - название ветки предваряют двоеточием :
+
+git push origin :to_delete
+git branch -r
+
+To github.com:grvsa/hello_one.git
+ - [deleted]         to_delete
+
+ github/master
+ origin/fix_error
+ origin/master
+
+ #переименовать ветку в удаленном репозитории сложно
+ #поэтому делаем в несколько шагов
+ - клон ветки в локальный репозиторий
+ - переименование ветки в локальном репозитории
+ - пуш ветки в удаленный репозиторий
+ - удаление ветки со старым названием в удаленном репозитории
+
+git branch to_delete origin/fix_error
+git push origin to_delete
+git push origin :fix_error
