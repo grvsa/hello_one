@@ -497,3 +497,56 @@ git status !
 создается папка .git
 там внутри будет файл конфиг где и будет прописано расположение удаленного
 репозитория.
+
+#лекция 9 !
+# создание удаленных веток в github репозитории
+
+#список веток в удаленном репозитории:
+git branch -r
+
+#создаем новую ветку fix_error
+git checkout -b fix_error
+#список локальных веток - автоматом перешли в fix_error при создании
+git branch
+* fix_error
+  master
+  test
+
+#закидываем ветку в удаленный репозиторий
+git push origin fix_error
+
+#список веток в удаленном репозитории :
+git branch -r
+
+github/master
+origin/fix_error
+origin/master
+
+#теперь переименуем локальную ветку в другую - что будет с удаленным репозиторием ?
+git branch -m fix_error to_delete
+git branch
+
+master
+test
+* to_delete
+
+#в удаленном репозитории без изменений
+git branch -r
+
+github/master
+origin/fix_error
+origin/master
+
+#можем отправить её на сервер
+git push origin to_delete
+git branch -r
+
+github/master
+origin/fix_error
+origin/master
+origin/to_delete
+
+#удалим локальную ветку to_delete для этого переместимся на другую ветку
+git checkout master
+git branch -D to_delete
+git branch
