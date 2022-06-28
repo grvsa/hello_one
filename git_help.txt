@@ -792,3 +792,20 @@ $ git gg
 * f324afd -  (origin/to_delete, origin/master, to_delete) Commit fromhome ! (grvsa) 27.06.2022 19:27
 * 66f69d8 -  (tag: v1.2.0) finish for today 27.06.2022 (GRVSA Alex) 27.06.2022 16:47
 *   a1ee0f9 -  Merge branch 'master' of github.com:grvsa/hello_one (GRVSA Alex) 27.06.2022 16:42
+
+
+#ВНИМАНИЕ ! по умолчанию git push не отправляет тэги в удаленный репозиторий
+#их необходимо указывать явно !
+
+git push origin v1.2.0
+
+#если тегов много можно загрузить их все через параметр
+git push origin --tags
+
+#что бы запросить тэги на удаленном сервере используем команду
+$ git ls-remote --tags origin
+Enter passphrase for key '/c/Users/pavlikov/.ssh/id_rsa':
+30e49ad179a772e846d78b32af2cac7143fdd28a        refs/tags/v1.5.0
+
+#удалить тэг на удаленном сервере так же как и ветку
+git push origin :v1.2.0
