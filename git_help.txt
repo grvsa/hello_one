@@ -585,3 +585,40 @@ To github.com:grvsa/hello_one.git
 git branch to_delete origin/fix_error
 git push origin to_delete
 git push origin :fix_error
+
+
+#сахар - если git bash то можно в командной строке показывать текущую ветку
+#на винде в git-bash работает автоматом - список команд сделаем для ubuntu что бы повторить
+#дома и протестить - по сути это bash скрипты
+
+#создаем папку .bash в папке репозитория
+mkdir .bash
+cd bash
+
+#теперь в эту папку необходимо клонировать репозиторий git-aware-prompt
+#на сайте github ищем этот репозиторий и копируем ссылку
+#в нашем случае ссылка нужна https а не ssh git@github.com:jimeh/git-aware-prompt.git
+#ссылка ssh необходима если мы планируем вносить изменения в репозиторий
+#для клонирования хватит и https ссылки https://github.com/jimeh/git-aware-prompt.git
+
+git clone https://github.com/jimeh/git-aware-prompt.git
+
+#теперь необходимо внести изменения в файл .bash_profile домашнего каталога
+#этот файл будет загружаться автоматически при инициализации терминала
+
+export PATH#/bin:/sbin:/usr/bin:/usr/local/sbin:/usr/local/bin:$PATH
+source "~/.bash/git-aware-prompt/main.sh"
+export PS1#"\w \[\$txtcyn]\$git_branch\[\$txtred\]\$git_dirty\[\$txtrst\]\$ "
+
+#в unix системах PS1 отвечает за подсказки в коммандной строке
+#теперь при переходе в папку репозитория этот скрипт подгрузится автоматом
+
+#изменения можно сохранить не добавляя их в коммит
+#к примеру если оно не финальное ! и необходима доработка
+#в этом случае мы добавляем их в индекс
+git add .
+
+#но вместо коммита мы делаем
+git stash
+
+#при этом откатываемся на старое стабильное состояние НО ! новые изменения не потеряны
