@@ -550,3 +550,8 @@ origin/to_delete
 git checkout master
 git branch -D to_delete
 git branch
+
+* master
+  test
+
+  
