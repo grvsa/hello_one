@@ -809,3 +809,43 @@ Enter passphrase for key '/c/Users/pavlikov/.ssh/id_rsa':
 
 #удалить тэг на удаленном сервере так же как и ветку
 git push origin :v1.2.0
+
+
+#git 11 слияние веток. Создаем ветку feature вносим в неё изменения.
+#переключаемся в ветку master. Вносим изменения в неё тоже.
+#теперь нам надо применить изменения из master в feature
+
+
+
+-----------------------------------------------------------------------
+$ git branch
+* master
+  old_version_of_project
+  test
+  to_delete
+
+pavlikov@DA-PC-N2 MINGW64 /c/dj (master)
+$ git branch -D test
+Deleted branch test (was 20e74c6).
+
+pavlikov@DA-PC-N2 MINGW64 /c/dj (master)
+$ git branch -D old_version_of_project
+Deleted branch old_version_of_project (was 66f69d8).
+
+pavlikov@DA-PC-N2 MINGW64 /c/dj (master)
+$ git branch
+* master
+  to_delete
+
+pavlikov@DA-PC-N2 MINGW64 /c/dj (master)
+$ git branch -D to_delete
+Deleted branch to_delete (was f324afd).
+
+pavlikov@DA-PC-N2 MINGW64 /c/dj (master)
+$ git branch
+* master
+-------------------------------------------------------------------
+
+git checkout -b feature
+#сразу закидываем на сервер и потом создадим коммит
+git push origin feature
