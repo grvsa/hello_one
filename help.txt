@@ -2,3 +2,5 @@ change some information
 
 Ееще один изменение
 New line for traced files
+
+new line in master branch
