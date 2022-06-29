@@ -849,3 +849,26 @@ $ git branch
 git checkout -b feature
 #сразу закидываем на сервер и потом создадим коммит
 git push origin feature
+
+#изменяем readme.txt и делаем коммит
+#преключаемся в master изменяем hello.txt и делаем коммит
+#вносим изменения в ветку feature из master
+git checkout feature
+git merge master
+
+-------------------------------------------------------------------
+pavlikov@DA-PC-N2 MINGW64 /c/dj (feature)
+$ git gg
+*   c1afec8 -  (HEAD -> feature) Merge branch 'master' into feature (GRVSA Alex) 29.06.2022 11:19
+|\
+| * 21ec8fb -  (master) new line in help.txt - master branch (GRVSA Alex) 29.06.2022 11:19
+* | 4e2135e -  New line in readme.txt - feature (GRVSA Alex) 29.06.2022 11:17
+|/
+* 6047c04 -  (tag: v1.6.0, origin/master, origin/feature) Finish 28.06.2022 next lesson 11 (GRVSA Alex) 28.06.2022 16:33
+* 30e49ad -  (tag: v1.5.0) Last ? (GRVSA Alex) 28.06.2022 16:22
+* 084e708 -  (tag: v1.4.0, tag: v1.3.0) com (GRVSA Alex) 28.06.2022 15:43
+* be327ad -  Text (GRVSA Alex) 28.06.2022 15:35
+------------------------------------------------------------------
+
+#можно поступить по другому и переметить ветку feature на из предыдущего коммита ветки
+#мастер в последний коммит ветки мастер
